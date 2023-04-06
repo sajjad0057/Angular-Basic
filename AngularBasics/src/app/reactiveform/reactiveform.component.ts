@@ -10,12 +10,17 @@ export class ReactiveformComponent implements OnInit{
 
   title = 'ReactiveForms';
   reactiveForm : FormGroup;
+  nonWhitespaceRegExp: RegExp = new RegExp("\\S");
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      firstname : new FormControl(null, Validators.required),
-      lastname : new FormControl(null, Validators.required),
-      email : new FormControl(null, [Validators.required, Validators.email]),
+      personalDetails: new FormGroup(
+        {
+          firstname : new FormControl(null, [ Validators.required, Validators.pattern(this.nonWhitespaceRegExp)]),
+          lastname : new FormControl(null, Validators.required),
+          email : new FormControl(null, [Validators.required, Validators.email]),
+        }
+      ),
       gender : new FormControl('male'),
       country : new FormControl('bangladesh'),
       hobbies : new FormControl(null)
