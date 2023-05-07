@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,15 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   
-  passwordFieldType : string = "password"
+  passwordFieldType : string = "password";
   isFieldTypeText: boolean = false;
   eyeIcon: string = "fa fa-eye-slash";
+  loginForm!: FormGroup; 
 
-  constructor(){
+  constructor(private fb: FormBuilder){
 
   }
 
   ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      username: ['',Validators.required],
+      password: ['',Validators.required]
+    })
   }
 
   hideShowPass(){
