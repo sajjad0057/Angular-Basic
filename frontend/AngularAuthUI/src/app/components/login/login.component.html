@@ -8,7 +8,7 @@
                         <div class="panel-body p-3">
                             <form [formGroup]="loginForm">
                                 <div class="form-group pt-3">
-                                    <div class="input-field">
+                                    <div class="input-field" [class.error]="loginForm.controls['username'].touched && (loginForm.controls['username'].dirty && loginForm.hasError('required','username'))">
                                         <span><i class="fa fa-user p-2"></i></span>
                                         <input formControlName="username" type="text" placeholder="Username">
                                     </div>
@@ -17,7 +17,7 @@
                                     *Username is required
                                 </small>
                                 <div class="form-group pt-3">
-                                    <div class="input-field">
+                                    <div class="input-field" [class.error]="loginForm.controls['password'].touched && (loginForm.controls['password'].dirty && loginForm.hasError('required','password'))">
                                         <span><i class="fa fa-lock p-2"></i></span>
                                         <input formControlName="password" [type]="passwordFieldType" placeholder="Password">
                                         <span (click)="hideShowPass()"><i class="{{eyeIcon}}"></i></span>
@@ -29,7 +29,7 @@
                                 <div class="form-inline fr mt-4">
                                     <a id="forget" class="font-weight-bold">Forget Password ?</a>
                                 </div>
-                                <button [disabled] = "loginForm.invalid" type="submit" class="btn btn-primary btn-block mt-4 w-100">
+                                <button (click)="onSubmit()" type="submit" class="btn btn-primary btn-block mt-4 w-100">
                                     Login
                                 </button>
                                 <div class="text-center pt-4 text-muted">Don't have account?
