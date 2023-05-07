@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     }else{
       console.log("login form is not valid");
       ValidateForm.validateAllFormFields(this.loginForm)
-      alert("Your form is invalid!");
     }
   }
 }

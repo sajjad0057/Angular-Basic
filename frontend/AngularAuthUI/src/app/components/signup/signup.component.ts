@@ -42,7 +42,6 @@ export class SignupComponent implements OnInit {
     }else{
       console.log("sign up form is not valid"); 
       ValidateForm.validateAllFormFields(this.signUpForm)
-      alert("Your form is invalid!");
     }
   }
   
