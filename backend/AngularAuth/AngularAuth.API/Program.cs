@@ -1,4 +1,7 @@
 
+using AngularAuth.API.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace AngularAuth.API
 {
     public class Program
@@ -13,6 +16,12 @@ namespace AngularAuth.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<AppDbContext>(option =>
+            {
+                option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
 
             var app = builder.Build();
 
