@@ -8,22 +8,22 @@
                         <div class="panel-body p-3">
                             <form [formGroup]="loginForm">
                                 <div class="form-group pt-3">
-                                    <div class="input-field" [class.error]="loginForm.controls['username'].touched && (loginForm.controls['username'].dirty && loginForm.hasError('required','username'))">
+                                    <div class="input-field" [class.error]="(loginForm.controls['username'].dirty && loginForm.hasError('required','username'))">
                                         <span><i class="fa fa-user p-2"></i></span>
                                         <input formControlName="username" type="text" placeholder="Username">
                                     </div>
                                 </div>
-                                <small *ngIf="loginForm.controls['username'].touched && (loginForm.controls['username'].dirty && loginForm.hasError('required','username'))" class="text-danger">
+                                <small *ngIf="(loginForm.controls['username'].dirty && loginForm.hasError('required','username'))" class="text-danger">
                                     *Username is required
                                 </small>
                                 <div class="form-group pt-3">
-                                    <div class="input-field" [class.error]="loginForm.controls['password'].touched && (loginForm.controls['password'].dirty && loginForm.hasError('required','password'))">
+                                    <div class="input-field" [class.error]="(loginForm.controls['password'].dirty && loginForm.hasError('required','password'))">
                                         <span><i class="fa fa-lock p-2"></i></span>
                                         <input formControlName="password" [type]="passwordFieldType" placeholder="Password">
                                         <span (click)="hideShowPass()"><i class="{{eyeIcon}}"></i></span>
                                     </div>
                                 </div>
-                                <small *ngIf="loginForm.controls['password'].touched  && (loginForm.controls['password'].dirty && loginForm.hasError('required','password'))" class="text-danger">
+                                <small *ngIf="(loginForm.controls['password'].dirty && loginForm.hasError('required','password'))" class="text-danger">
                                     *Password is required
                                 </small>
                                 <div class="form-inline fr mt-4">
