@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import ValidateForm from 'src/app/helpers/validateForm';
 
 @Component({
   selector: 'app-login',
@@ -35,20 +36,9 @@ export class LoginComponent implements OnInit {
       console.log(this.loginForm.value)
       //send the obj to backend
     }else{
-      console.log("form is not valid"); 
-      this.validateAllFormFields(this.loginForm)
+      console.log("login form is not valid");
+      ValidateForm.validateAllFormFields(this.loginForm)
       alert("Your form is invalid!");
     }
-  }
-
-  private validateAllFormFields(formGroup:FormGroup){
-    Object.keys(formGroup.controls).forEach(field=>{
-      const control = formGroup.get(field);
-      if(control instanceof FormControl){
-        control.markAsDirty({onlySelf:true})
-      }else if(control instanceof FormGroup){
-        this.validateAllFormFields(control)
-      }
-    })
   }
 }

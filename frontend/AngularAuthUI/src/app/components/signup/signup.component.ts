@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import ValidateForm from 'src/app/helpers/validateForm';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
+
 export class SignupComponent implements OnInit {
   
   passwordFieldType : string = "password"
@@ -38,19 +40,10 @@ export class SignupComponent implements OnInit {
       console.log(this.signUpForm.value);
       
     }else{
-      // keep here logic for invalid form
-      this.validateAllFormFields(this.signUpForm)
+      console.log("sign up form is not valid"); 
+      ValidateForm.validateAllFormFields(this.signUpForm)
+      alert("Your form is invalid!");
     }
   }
   
-  private validateAllFormFields(formGroup:FormGroup){
-    Object.keys(formGroup.controls).forEach(field=>{
-      const control = formGroup.get(field);
-      if(control instanceof FormControl){
-        control.markAsDirty({onlySelf:true})
-      }else if(control instanceof FormGroup){
-        this.validateAllFormFields(control)
-      }
-    })
-  }
 }
