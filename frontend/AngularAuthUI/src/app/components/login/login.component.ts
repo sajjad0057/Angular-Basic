@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ValidateForm from 'src/app/helpers/validateForm';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   eyeIcon: string = "fa fa-eye-slash";
   loginForm!: FormGroup; 
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private authService: AuthService){
 
   }
 
@@ -31,10 +32,20 @@ export class LoginComponent implements OnInit {
     this.isFieldTypeText ? this.passwordFieldType = "text" : this.passwordFieldType = "password";
   }
 
-  onSubmit(){
+  onLogin(){
     if(this.loginForm.valid){
       console.log(this.loginForm.value)
       //send the obj to backend
+
+      this.authService.login(this.loginForm.value).subscribe({
+        next:(res)=>{
+          alert(res.message)
+        },
+        error:(err)=>{
+          alert(err?.error.message)
+        }
+      })
+      
     }else{
       console.log("login form is not valid");
       ValidateForm.validateAllFormFields(this.loginForm)
