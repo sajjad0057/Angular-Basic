@@ -22,6 +22,20 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    #region Config Cors
+
+    builder.Services.AddCors(option =>
+    {
+        option.AddPolicy("MyPolicy", builder =>
+        {
+            builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        });
+    });
+
+    #endregion
+
     builder.Services.AddDbContext<AppDbContext>(option =>
     {
         option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -41,8 +55,13 @@ try
 
     app.UseHttpsRedirection();
 
-    app.UseAuthorization();
+    #region register Cors into pipeline
+    //// it must be keep above Authorization
+    app.UseCors("MyPolicy");
+    #endregion
 
+    app.UseAuthentication();
+    app.UseAuthorization();
 
     app.MapControllers();
 
