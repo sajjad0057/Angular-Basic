@@ -48,9 +48,9 @@ export class SignupComponent implements OnInit {
         error:(err=>{
           alert(err?.error.message)
         })
-      })
-      
-    }else{
+      })   
+    }
+    else{
       console.log("sign up form is not valid"); 
       ValidateForm.validateAllFormFields(this.signUpForm)
     }

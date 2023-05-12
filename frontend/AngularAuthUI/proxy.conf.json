@@ -1,0 +1,10 @@
+{
+    // after config this file , must be rebuild angular app using (ng serve), other wise it can't work properly
+    
+    "/api/*" : {
+        "target" : "https://localhost:7175",
+        "secure" : false,
+        "logLevel" : "debug",
+        "changeOrigin" : true
+    }
+}
